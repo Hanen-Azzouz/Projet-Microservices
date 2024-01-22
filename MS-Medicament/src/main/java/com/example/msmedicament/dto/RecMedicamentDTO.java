@@ -6,7 +6,7 @@ import lombok.Builder;
 import java.util.Date;
 
 @Builder
-public record RecMedicamentDTO(long id, String name, Date dateexp, long iddepot, RecDepotDTO recDepotDTO) {
+public record RecMedicamentDTO(long id, String name, Date dateexp, RecDepotDTO recDepotDTO) {
     public static Medicament mapToEntity(RecMedicamentDTO recMedicamentDTO){
         return Medicament.builder()
                 .idMedicament(recMedicamentDTO.id)
@@ -22,10 +22,8 @@ public record RecMedicamentDTO(long id, String name, Date dateexp, long iddepot,
                 .id(medicament.getIdMedicament())
                 .name(medicament.getNomMedicament())
                 .dateexp(medicament.getDateExpiration())
-                .iddepot(medicament.getIdDepot())
                 .build();
 
     }
 
 }
-

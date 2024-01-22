@@ -3,7 +3,7 @@ import com.example.msdepot.entities.Depot;
 import lombok.Builder;
 
 @Builder
-public record RecDepotDTO(long id, String name, String emplacement) {
+public record RecDepotDTO(String id, String name, String emplacement) {
 
     public static Depot mapToEntity(RecDepotDTO depotDTO){
         return Depot.builder()

@@ -1,6 +1,7 @@
 package com.example.msdepot.restcontroller;
 import com.example.msdepot.dto.RecDepotDTO;
 import com.example.msdepot.services.IDepotService;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,9 @@ public class depotRestController {
         return depotRest.updateDepot(depotDTO);
     }
 
+
     @DeleteMapping("deleteDepotById/{id}")
-    void deleteDepotById(@PathVariable long id){
+    void deleteDepotById(@PathVariable @ApiParam(value = "ID de Depot", required = true) String id){
         depotRest.deleteDepot(id);
     }
 
@@ -35,7 +37,7 @@ public class depotRestController {
         return depotRest.findAll(size,pagenbr);
     }
     @GetMapping("findOneDepotById/{id}")
-    RecDepotDTO findById(@PathVariable long id){
+    RecDepotDTO findById(@PathVariable @ApiParam(value = "ID de depot", required = true) String id){
         return depotRest.findById(id);
     }
 

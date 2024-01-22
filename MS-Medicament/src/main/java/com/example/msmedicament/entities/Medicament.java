@@ -1,24 +1,25 @@
 package com.example.msmedicament.entities;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
-@Document
+
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
 public class Medicament implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     long idMedicament;
     String nomMedicament;
     Date dateExpiration;
-    long idDepot;
+    String idDepot;
 }

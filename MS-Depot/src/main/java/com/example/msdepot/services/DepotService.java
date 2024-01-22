@@ -21,7 +21,7 @@ public class DepotService implements IDepotService{
     }
 
     @Override
-    public RecDepotDTO findById(long id) {
+    public RecDepotDTO findById(String id) {
         Depot depot=depotRepo.findById(id).orElseThrow(()->new IllegalArgumentException("No Stock found with this id" + id));
         return RecDepotDTO.mapToDTO(depot);
     }
@@ -38,7 +38,7 @@ public class DepotService implements IDepotService{
     }
 
     @Override
-    public void deleteDepot(long id) {
+    public void deleteDepot(String id) {
         depotRepo.deleteById(id);
 
     }

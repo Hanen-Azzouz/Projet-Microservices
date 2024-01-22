@@ -17,18 +17,19 @@ public class MedicamentService implements IMedicamentService {
     @Override
     public RecMedicamentDTO addMedicament(RecMedicamentDTO recMedicamentDTO) {
         Medicament medicament=medicamentRepo.save(recMedicamentDTO.mapToEntity(recMedicamentDTO));
+        RecDepotDTO depot=recMedicamentDTO.recDepotDTO();
+        feignDepotService.addDepot(depot);
         return recMedicamentDTO.mapToDTO(medicament);
     }
 
     @Override
     public RecMedicamentDTO findById(long id) {
         Medicament medicament=medicamentRepo.findById(id).orElseThrow(()->new IllegalArgumentException("No Medicament found with this id"));
-        long depotId = medicament.getIdDepot();
+        String depotId = medicament.getIdDepot();
         RecDepotDTO recDepotDTO = feignDepotService.findById(depotId);
 
         RecMedicamentDTO recMedicamentDTO =new RecMedicamentDTO(
-                medicament.getIdMedicament(),medicament.getNomMedicament(),medicament.getDateExpiration(),
-                medicament.getIdDepot(), recDepotDTO
+                medicament.getIdMedicament(),medicament.getNomMedicament(),medicament.getDateExpiration(), recDepotDTO
         );
         return recMedicamentDTO ;
     }

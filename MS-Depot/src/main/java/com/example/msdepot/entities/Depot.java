@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Depot implements Serializable {
     @Id
     @Setter(AccessLevel.NONE)
-    long idDepot;
+    String idDepot;
     String nomDepot;
     String emplacement;
 }
