@@ -2,18 +2,27 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Gateway-Service" />
-        <module name="Registry-Service" />
         <module name="Config-Service" />
+        <module name="MS-Honoraire-Query" />
+        <module name="Registry-Service" />
+        <module name="Gateway-Service" />
+        <module name="MS-Honoraire-Command" />
+        <module name="Medecin-Service" />
+        <module name="Honoraire-Service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Config-Service" target="17" />
       <module name="Gateway-Service" target="17" />
+      <module name="Honoraire-Service" target="17" />
+      <module name="Medecin-Service" target="17" />
+      <module name="MS-Honoraire-Command" target="17" />
+      <module name="MS-Honoraire-Query" target="17" />
       <module name="Registry-Service" target="17" />
     </bytecodeTargetLevel>
   </component>
@@ -21,6 +30,10 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Config-Service" options="-parameters" />
       <module name="Gateway-Service" options="-parameters" />
+      <module name="Honoraire-Service" options="-parameters" />
+      <module name="MS-Honoraire-Command" options="-parameters" />
+      <module name="MS-Honoraire-Query" options="-parameters" />
+      <module name="Medecin-Service" options="-parameters" />
       <module name="Registry-Service" options="-parameters" />
     </option>
   </component>

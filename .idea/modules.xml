@@ -4,6 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Config-Service/Config-Service.iml" filepath="$PROJECT_DIR$/Config-Service/Config-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/Gateway-Service/Gateway-Service.iml" filepath="$PROJECT_DIR$/Gateway-Service/Gateway-Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Honoraire-Service/Honoraire-Service.iml" filepath="$PROJECT_DIR$/Honoraire-Service/Honoraire-Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MS-Honoraire-Command/MS-Honoraire-Command.iml" filepath="$PROJECT_DIR$/MS-Honoraire-Command/MS-Honoraire-Command.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MS-Honoraire-Query/MS-Honoraire-Query.iml" filepath="$PROJECT_DIR$/MS-Honoraire-Query/MS-Honoraire-Query.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Medecin-Service/Medecin-Service.iml" filepath="$PROJECT_DIR$/Medecin-Service/Medecin-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Projet-Web-Distribue.iml" filepath="$PROJECT_DIR$/.idea/Projet-Web-Distribue.iml" />
       <module fileurl="file://$PROJECT_DIR$/Registry-Service/Registry-Service.iml" filepath="$PROJECT_DIR$/Registry-Service/Registry-Service.iml" />
     </modules>

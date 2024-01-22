@@ -6,6 +6,10 @@
         <option value="$PROJECT_DIR$/Config-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Gateway-Service/pom.xml" />
         <option value="$PROJECT_DIR$/Registry-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Medecin-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/Honoraire-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/MS-Honoraire-Command/pom.xml" />
+        <option value="$PROJECT_DIR$/MS-Honoraire-Query/pom.xml" />
       </list>
     </option>
   </component>
