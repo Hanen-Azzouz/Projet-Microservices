@@ -1,0 +1,70 @@
+    version: '3.8'
+    services:
+      # Service MySQL
+      mysql:
+        image: mysql:8.2.0
+        container_name: mysql
+        environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: msMedicaments
+          MYSQL_USER: root
+          MYSQL_PASSWORD:""
+        ports:
+          - "3306:3306"
+        networks:
+          - my-network
+
+      # Registry-Service
+        registry-service-container:
+          image: Registry-Service
+          container_name: spring-boot-container
+          build:
+            context: .
+            dockerfile: Dockerfile
+          ports:
+            - "8090:8090"
+          environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devops?allowPublicKeyRetrieval=true&useSSL=false
+            MYSQL_HOST: mysql
+            MYSQL_USER: devops
+            MYSQL_PASSWORD: devops
+            MYSQL_PORT: 3306
+          depends_on:
+            - mysql
+          networks:
+            - my-network
+
+      # MS Config-Service
+      spring-boot-container:
+        image: MS-Depot
+        container_name: spring-boot-container
+        build:
+          context: .
+          dockerfile: Dockerfile
+        ports:
+          - "8090:8090"
+        environment:
+          SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devops?allowPublicKeyRetrieval=true&useSSL=false
+          MYSQL_HOST: mysql
+          MYSQL_USER: devops
+          MYSQL_PASSWORD: devops
+          MYSQL_PORT: 3306
+        depends_on:
+          - mysql
+        networks:
+          - my-network
+
+      # Angular App
+      devops-project-front:
+        image: devops-project-front
+        container_name: devops-project-front
+        ports:
+          - "92:4200"
+        networks:
+          - my-network
+        depends_on:
+          - spring-boot-container
+
+    networks:
+      my-network:
+        driver: bridge

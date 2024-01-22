@@ -1,0 +1,5 @@
+FROM openjdk:17-oracle
+COPY target/*.jar ms-registryservice.jar
+RUN mkdir /app
+WORKDIR /app
+CMD ["java", "-jar", "/app/ms-registryservice.jar"]

@@ -1,0 +1,193 @@
+version: "3"
+
+services:
+
+  discovery-service:
+
+    build: ./Registry-Service
+    container_name: registry-service
+
+    ports:
+
+      - '8761:8761'
+
+    expose:
+
+      - '8761'
+
+    healthcheck:
+
+      test: [ "CMD", "curl", "-f", http://localhost:8761/actuator/health ]
+
+      interval: 10s
+
+      retries: 4
+
+  config-service:
+
+    build: ./Config-Service
+
+    container_name: config-service
+
+    ports:
+
+      - '8888:8888'
+
+    expose:
+
+      - '8888'
+
+    environment:
+
+      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+
+    healthcheck:
+
+      test: [ "CMD", "curl", "-f", http://localhost:8888/actuator/health ]
+
+      interval: 10s
+
+      retries: 4
+
+    depends_on:
+
+      discovery-service:
+
+        condition: service_healthy
+
+  medicament-service:
+
+    build: ./MS-Medicament
+
+    container_name: medicament-service
+
+    ports:
+
+      - '9082:9082'
+
+    expose:
+
+      - '9082'
+
+    environment:
+
+      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+
+      - CONFIG_SERVICE=http://config-service:8888
+
+    healthcheck:
+
+      test: [ "CMD", "curl", "-f", http://localhost:9099/actuator/health ]
+
+      interval: 30s
+
+      retries: 6
+
+    depends_on:
+
+      - config-service
+
+      - mongodb
+
+  depot-service:
+
+    build: ./MS-Depot
+
+    container_name: depot-service
+
+    ports:
+
+      - '9081:9081'
+
+    expose:
+
+      - '9081'
+
+    environment:
+
+      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+
+      - CONFIG_SERVICE=http://config-service:8888
+
+    healthcheck:
+
+      test: [ "CMD", "curl", "-f", http://localhost:9091/actuator/health ]
+
+      interval: 30s
+
+      retries: 6
+
+    depends_on:
+
+      - config-service
+
+      - mysqldb
+
+  gateway-service:
+
+    build: ./Gateway-Service
+
+    container_name: gateway-service
+
+    ports:
+
+      - '9090:9090'
+
+    expose:
+
+      - '9090'
+
+    environment:
+
+      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+
+    healthcheck:
+
+      test: [ "CMD", "curl", "-f", http://localhost:9090/actuator/health ]
+
+      interval: 10s
+
+      retries: 4
+
+    depends_on:
+
+      config-service:
+
+        condition: service_healthy
+
+  mysqldb:
+      image: mysql:8.2.0
+      container_name: mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: msMedicaments
+        MYSQL_USER: root
+        MYSQL_PASSWORD: ""
+      ports:
+        - "3306:3306"
+      networks:
+        - my-network
+  mongodb:
+
+    image: 'mongo:3.4.1'
+
+    ports:
+
+      - '27017:27017'
+
+    volumes:
+
+      - 'mongo:/data/db'
+
+
+
+volumes:
+
+  db_data: { }
+
+  mongo:
+
+
+networks:
+    my-network:
+      driver: bridge

@@ -13,7 +13,7 @@ public interface DepotFeignClient {
     @GetMapping("Depots/findOneDepotById/{id}")
     RecDepotDTO findById(@PathVariable String id);
 
-    @PostMapping("Depots/addDepot/")
+    @PostMapping("Depots/addDepot")
     RecDepotDTO addDepot(@RequestBody RecDepotDTO depotDTO);
 
 }
