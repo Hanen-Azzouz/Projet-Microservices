@@ -7,11 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Gateway-Service" />
-        <module name="Registry-Service" />
         <module name="Config-Service" />
+        <module name="Registry-Service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="clinique" target="17" />
       <module name="Config-Service" target="17" />
       <module name="Gateway-Service" target="17" />
       <module name="Registry-Service" target="17" />
@@ -22,6 +23,7 @@
       <module name="Config-Service" options="-parameters" />
       <module name="Gateway-Service" options="-parameters" />
       <module name="Registry-Service" options="-parameters" />
+      <module name="clinique" options="-parameters" />
     </option>
   </component>
 </project>
