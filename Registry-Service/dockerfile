@@ -1,5 +1,5 @@
 FROM openjdk:17-oracle
-COPY target/*.jar ms-registryservice.jar
+COPY target/*.jar registry-service.jar
 RUN mkdir /app
 WORKDIR /app
-CMD ["java", "-jar", "/app/ms-registryservice.jar"]
+CMD ["java", "-jar", "/app/registry-service.jar"]

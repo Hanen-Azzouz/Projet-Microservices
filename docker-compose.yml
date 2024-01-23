@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-  discovery-service:
+  registry-service:
 
     build: ./Registry-Service
     container_name: registry-service
@@ -39,7 +39,7 @@ services:
 
     environment:
 
-      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+      - DISCOVERY_SERVICE_URL=http://registry-service:8761/eureka
 
     healthcheck:
 
@@ -51,7 +51,7 @@ services:
 
     depends_on:
 
-      discovery-service:
+      registry-service:
 
         condition: service_healthy
 
@@ -71,7 +71,7 @@ services:
 
     environment:
 
-      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+      - DISCOVERY_SERVICE_URL=http://registry-service:8761/eureka
 
       - CONFIG_SERVICE=http://config-service:8888
 
@@ -105,7 +105,7 @@ services:
 
     environment:
 
-      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+      - DISCOVERY_SERVICE_URL=http://registry-service:8761/eureka
 
       - CONFIG_SERVICE=http://config-service:8888
 
@@ -139,7 +139,7 @@ services:
 
     environment:
 
-      - DISCOVERY_SERVICE_URL=http://discovery-service:8761/eureka
+      - DISCOVERY_SERVICE_URL=http://registry-service:8761/eureka
 
     healthcheck:
 
