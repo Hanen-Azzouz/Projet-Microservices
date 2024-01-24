@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("clinique")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class CliniqueController {
 
     private CliniqueService cliniqueService;
@@ -42,9 +43,10 @@ public class CliniqueController {
         return new ResponseEntity<>(cliniques, cliniques.size() > 0 ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{id}")
+
     public ResponseEntity<?> getClinique(@PathVariable("id") Long id) throws CliniqueException{
         try {
+            System.out.println("behi");
             return new ResponseEntity<>(cliniqueService.getClinique(id), HttpStatus.OK);
         } catch (CliniqueException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
