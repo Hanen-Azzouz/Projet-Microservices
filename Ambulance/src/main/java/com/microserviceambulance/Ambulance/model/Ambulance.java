@@ -16,6 +16,12 @@ import java.util.Date;
 @Document(collection="ambulance")
 public class Ambulance {
 
+    public Ambulance(String id, String matricule, String marque, Long idClinique) {
+        this.id = id;
+        this.matricule = matricule;
+        this.marque = marque;
+        this.idClinique = idClinique;
+    }
 
     @Id
     private String id;
@@ -23,10 +29,11 @@ public class Ambulance {
 
     private String matricule;
 
-
     private String marque;
 
     private Date createdAt;
 
     private Date updatedAt;
+
+    private Long idClinique;
 }

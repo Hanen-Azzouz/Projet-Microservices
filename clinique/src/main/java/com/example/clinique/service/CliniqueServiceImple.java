@@ -61,17 +61,12 @@ public class CliniqueServiceImple implements CliniqueService{
     @Override
     public CliniqueDTO getClinique(Long cliniqueId) throws CliniqueException{
         Optional<Clinique> cliniqueOptional = cliniqueRepository.findById(cliniqueId);
-        System.out.println("here 1");
         if (!cliniqueOptional.isPresent()) {
             throw new CliniqueException(CliniqueException.NotFoundException(cliniqueId));
         }else {
-            System.out.println("here 2");
             CliniqueDTO dto =CliniqueMapper.mapToCliniqueDto(cliniqueOptional.get());
-            System.out.println("here 3");
             List<AmbulanceDTO> ambulances = apiClient.getAmbulances(dto.getId());
             dto.setAmbulances(ambulances);
-            System.out.println("here 4");
-            System.out.println(ambulances);
             return dto;
         }
     }

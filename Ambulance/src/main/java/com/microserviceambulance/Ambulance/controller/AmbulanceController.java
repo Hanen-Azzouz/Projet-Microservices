@@ -1,5 +1,6 @@
 package com.microserviceambulance.Ambulance.controller;
 
+import com.microserviceambulance.Ambulance.DTO.AmbulanceDTO;
 import com.microserviceambulance.Ambulance.exception.AmbulanceException;
 import com.microserviceambulance.Ambulance.model.Ambulance;
 import com.microserviceambulance.Ambulance.service.AmbulanceService;
@@ -32,7 +33,7 @@ public class AmbulanceController {
 
     @GetMapping("/ambulances")
     public ResponseEntity<?> getAllAmbulance() {
-        List<Ambulance> ambulance = ambulanceService.getAllAmbulance();
+        List<AmbulanceDTO> ambulance = ambulanceService.getAllAmbulance();
         return new ResponseEntity<>(ambulance, ambulance.size() > 0 ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
@@ -57,7 +58,7 @@ public class AmbulanceController {
         }
     }
 
-    @PutMapping("/todos/{id}")
+    @PutMapping("/ambulances/{id}")
     public ResponseEntity<?> updateById(@PathVariable("id") String id, @RequestBody Ambulance ambulance)
     {
         try {
@@ -72,7 +73,11 @@ public class AmbulanceController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
-
+    @GetMapping("/ambulances-by-clinique/{id}")
+    public ResponseEntity<?> getAmbulanceByclinique(@PathVariable("id") int idClinique){
+        List<AmbulanceDTO> ambulance = ambulanceService.getAmbulanceByClinique(idClinique);
+        return new ResponseEntity<>(ambulance, ambulance.size() > 0 ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    }
 @GetMapping("/khalil")
 public String khalil() {
 

@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.microserviceambulance.Ambulance.DTO.AmbulanceDTO;
 import com.microserviceambulance.Ambulance.exception.AmbulanceException;
+import com.microserviceambulance.Ambulance.mapper.AmbulanceMapper;
 import com.microserviceambulance.Ambulance.model.Ambulance;
 import com.microserviceambulance.Ambulance.repository.AmbulanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +25,42 @@ public class AmbulanceServiceImple implements AmbulanceService {
 
 
     @Override
-    public List<Ambulance> getAllAmbulance() {
+    public List<AmbulanceDTO> getAllAmbulance() {
         List<Ambulance> ambulances = ambulanceRepo.findAll();
+        List<AmbulanceDTO> ambulancesDto= new ArrayList<>();
         if (ambulances.size() > 0) {
-            return ambulances;
+            for (Ambulance ambulance : ambulances) {
+                AmbulanceDTO dto =AmbulanceMapper.mapToAmbulanceDto(ambulance);
+                ambulancesDto.add(dto);
+            }
+            return ambulancesDto;
         }else {
-            return new ArrayList<Ambulance>();
+            return new ArrayList<AmbulanceDTO>();
         }
     }
 
     @Override
-    public Ambulance getAmbulance(String id) throws AmbulanceException {
+    public List<AmbulanceDTO> getAmbulanceByClinique(int idClinique) {
+        List<Ambulance> ambulances = ambulanceRepo.findByClinique(idClinique);
+        List<AmbulanceDTO> ambulancesDto= new ArrayList<>();
+        if (ambulances.size() > 0) {
+            for (Ambulance ambulance : ambulances) {
+                AmbulanceDTO dto =AmbulanceMapper.mapToAmbulanceDto(ambulance);
+                ambulancesDto.add(dto);
+            }
+            return ambulancesDto;
+        }else {
+            return new ArrayList<AmbulanceDTO>();
+        }
+    }
+
+    @Override
+    public AmbulanceDTO getAmbulance(String id) throws AmbulanceException {
         Optional<Ambulance> ambulanceOptional = ambulanceRepo.findById(id);
         if (!ambulanceOptional.isPresent()) {
             throw new AmbulanceException(AmbulanceException.NotFoundException(id));
         }else {
-            return ambulanceOptional.get();
+            return AmbulanceMapper.mapToAmbulanceDto(ambulanceOptional.get());
         }
     }
 
