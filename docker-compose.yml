@@ -40,6 +40,7 @@ services:
     environment:
 
       - DISCOVERY_SERVICE_URL=http://registry-service:8761/eureka
+      - CONFIG_SERVICE=http://config-service:8888
 
     healthcheck:
 
@@ -77,7 +78,7 @@ services:
 
     healthcheck:
 
-      test: [ "CMD", "curl", "-f", http://localhost:9099/actuator/health ]
+      test: [ "CMD", "curl", "-f", http://localhost:9082/actuator/health ]
 
       interval: 30s
 
@@ -111,7 +112,7 @@ services:
 
     healthcheck:
 
-      test: [ "CMD", "curl", "-f", http://localhost:9091/actuator/health ]
+      test: [ "CMD", "curl", "-f", http://localhost:9081/actuator/health ]
 
       interval: 30s
 
@@ -161,8 +162,8 @@ services:
       environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: msMedicaments
-        MYSQL_USER: ms
-        MYSQL_PASSWORD: ms
+        MYSQL_USER: root
+        MYSQL_PASSWORD:
       ports:
         - "3306:3306"
       networks:
