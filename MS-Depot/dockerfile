@@ -1,5 +1,4 @@
 FROM openjdk:17-oracle
-COPY target/*.jar ms-depot.jar
-RUN mkdir /app
-WORKDIR /app
-CMD ["java", "-jar", "/app/ms-depot.jar"]
+COPY target/*.jar depot-service.jar
+EXPOSE 9081
+CMD ["java", "-jar", "depot-service.jar"]

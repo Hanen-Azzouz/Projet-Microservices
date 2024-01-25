@@ -1,5 +1,4 @@
 FROM openjdk:17-oracle
-COPY target/*.jar ms-medicament.jar
-RUN mkdir /app
-WORKDIR /app
-CMD ["java", "-jar", "/app/ms-medicament.jar"]
+COPY target/*.jar medicament-service.jar
+EXPOSE 9082
+CMD ["java", "-jar", "medicament-service.jar"]

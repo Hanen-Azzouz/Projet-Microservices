@@ -1,6 +1,4 @@
 FROM openjdk:17-oracle
 COPY target/*.jar gateway-service.jar
-RUN mkdir /app
-WORKDIR /app
-EXPOSE 8086
-CMD ["java", "-jar", "/app/gateway-service.jar"]
+EXPOSE 9090
+CMD ["java", "-jar", "gateway-service.jar"]

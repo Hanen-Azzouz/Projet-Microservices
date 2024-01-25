@@ -104,6 +104,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>depot-service</finalName>
     </build>
     <repositories>
         <repository>

@@ -155,38 +155,28 @@ services:
 
         condition: service_healthy
 
-  mysqldb:
+  mysql:
       image: mysql:8.2.0
       container_name: mysql
       environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: msMedicaments
-        MYSQL_USER: root
-        MYSQL_PASSWORD: ""
+        MYSQL_USER: ms
+        MYSQL_PASSWORD: ms
       ports:
         - "3306:3306"
       networks:
         - my-network
   mongodb:
-
     image: 'mongo:3.4.1'
-
     ports:
-
       - '27017:27017'
-
     volumes:
-
       - 'mongo:/data/db'
 
-
-
 volumes:
-
   db_data: { }
-
   mongo:
-
 
 networks:
     my-network:
