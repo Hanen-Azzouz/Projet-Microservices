@@ -121,7 +121,7 @@ services:
 
       - config-service
 
-      - mysqldb
+      - mysql
 
   gateway-service:
 
