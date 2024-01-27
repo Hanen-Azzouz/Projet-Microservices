@@ -72,6 +72,16 @@ public class CliniqueServiceImple implements CliniqueService{
     }
 
     @Override
+    public CliniqueDTO getCliniqueForAmbulance(Long cliniqueId) throws CliniqueException{
+        Optional<Clinique> cliniqueOptional = cliniqueRepository.findById(cliniqueId);
+        if (!cliniqueOptional.isPresent()) {
+            throw new CliniqueException(CliniqueException.NotFoundException(cliniqueId));
+        }else {
+            return CliniqueMapper.mapToCliniqueDto(cliniqueOptional.get());
+        }
+    }
+
+    @Override
     public void updateClinique(Long id, Clinique clinique) throws CliniqueException {
         Optional<Clinique> cliniqueWithId = cliniqueRepository.findById(id);
 

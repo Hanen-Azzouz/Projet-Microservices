@@ -14,6 +14,6 @@ public interface CliniqueService {
     List<CliniqueDTO> getAllClinique();
     void deleteClinique(Long id) throws CliniqueException;
     CliniqueDTO getClinique(Long cliniqueId) throws CliniqueException;
-
+    CliniqueDTO getCliniqueForAmbulance (Long cliniqueId) throws CliniqueException;
     public void updateClinique(Long id, Clinique clinique) throws CliniqueException;
 }

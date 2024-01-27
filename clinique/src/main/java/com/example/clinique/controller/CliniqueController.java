@@ -28,14 +28,7 @@ public class CliniqueController {
         return new ResponseEntity<>(savedClinique, HttpStatus.CREATED);
     }
 
-/*
 
-   // Build Get Employee REST API
-    @GetMapping("{id}")
-    public ResponseEntity<CliniqueDTO> getClinique(@PathVariable("id") Long employeeId){
-        APIResponseDto apiResponseDto = cliniqueService.getClinique(employeeId);
-        return new ResponseEntity<>(apiResponseDto, HttpStatus.OK);
-    }*/
 
     @GetMapping("")
     public ResponseEntity<?> getAllClinique() {
@@ -79,4 +72,16 @@ public class CliniqueController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/clinique-for-ambulance/{idClinique}")
+    public ResponseEntity<?> getCliniqueForAmbulance(@PathVariable("idClinique") Long idClinique) throws CliniqueException{
+        try {
+            CliniqueDTO dto = cliniqueService.getCliniqueForAmbulance(idClinique);
+            System.out.println("here");
+            return new ResponseEntity<>(dto, HttpStatus.OK);
+        } catch (CliniqueException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
